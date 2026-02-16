@@ -10,66 +10,80 @@
 body{
   margin:0;
   font-family:'Poppins',sans-serif;
-  background:#fff; /* asosiy rang oq */
-  color:#000;     /* matn qora */
+  background:#0051ff; /* asosiy rang oq */
+  color:#ffffff;     /* matn qora */
 }
 .page{display:none;padding:15px;padding-bottom:120px;}
 .active{display:block;}
 h3{margin-top:0;margin-bottom:15px;}
 
+#productList,
+#discountList{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:15px;
+}
 /* ==================== PRODUCT / CART / HISTORY ==================== */
 .product,.cart-item,.history-item{
-  background:#f0f0f0;  /* qo‘shimcha rang kulrang */
-  padding:12px;
-  margin-bottom:12px;
-  border-radius:14px;
+  background:#f1f1f100;  /* qo‘shimcha rang kulrang */
+  box-shadow: #0a00c5 0px 5px 5px; /* yumshoq soyalar */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:30px;
   display:flex;
-  gap:12px;
+  gap:30px;
   align-items:center;
   cursor:pointer;
-  border:1px solid #ccc; /* kulrang border */
+  border:3px solid #ffffff; /* kulrang border */
 }
 .product img,.cart-item img,.history-item img{
-  width:65px;height:65px;
-  border-radius:10px;
+  width:60%;height:60%;
+  border-radius:20px;
   object-fit:cover;
 }
 button{
-  padding:10px;
-  border-radius:8px;
+  padding:20px;
+  border-radius:10px;
   border:none;
   font-weight:600;
   cursor:pointer;
 }
-.primary{background:#000;color:#fff;} /* asosiy rang qora tugma */
-.secondary{background:#e0e0e0;color:#000;border:1px solid #ccc;} /* qo‘shimcha kulrang */
+.primary{background:#0051ff;color:#fff;} /* asosiy rang qora tugma */
+.secondary{background:#ffffff;color:#000;border:1px solid #ccc;} /* qo‘shimcha kulrang */
 button:disabled{background:#ccc;color:#888;}
 input{
-  width:100%;
+  width:95%;
+  align-items: center;
   padding:12px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  background:#f9f9f9; /* qo‘shimcha kulrang input */
-  color:#000;
+  border-radius:10px;
+  border:3px solid #fff;
+  background:#f9f9f997; /* qo‘shimcha kulrang input */
+  color:#ffffff;
   margin-bottom:10px;
 }
-.search{margin-bottom:15px;}
+input::placeholder{
+  color:#ffffff;
+}
+.search{margin-bottom:25px;}
 
 /* ==================== NAVBAR ==================== */
 .navbar{
   position:fixed;
   bottom:0;
   width:100%;
-  background:#f0f0f0; /* qo‘shimcha kulrang */
+  background:#0051ff; /* qo‘shimcha kulrang */
   display:flex;
   justify-content:space-around;
-  padding:8px 0;
-  border-top:1px solid #ccc;
+  padding:30px 0;
+  border-top:3px solid #ffffff;
 }
 .navbar button{
   background:none;
-  color:#000;
-  font-size:12px;
+  color:#ffffff;
+  font-size:20px;
 }
 
 /* ==================== MODAL ==================== */
@@ -85,7 +99,8 @@ input{
   align-items:center;
 }
 .modal-content{
-  background:#f0f0f0;
+  color: #0051ff;
+  background:#ffffff;
   width:90%;
   max-width:360px;
   border-radius:16px;
@@ -108,7 +123,7 @@ input{
 .qty-box button{
   width:40px;
   height:40px;
-  background:#000; /* asosiy rang qora */
+  background:#0051ff; /* asosiy rang qora */
   color:#fff;
   border-radius:50%;
 }
@@ -124,52 +139,49 @@ input{
 
 <!-- ==================== MENU ==================== -->
 <div id="menu" class="page active">
-  <h3 id="menuTitle">Mahsulotlar</h3>
-  <input class="search" type="text" id="searchMenu" placeholder="Qidirish..." oninput="renderProducts()">
+  <h3 id="menuTitle">Товары</h3>
+<input class="search" type="text" id="searchMenu" placeholder="Поиск..." oninput="renderProducts()">
   <div id="productList"></div>
 </div>
 
 <!-- ==================== DISCOUNT ==================== -->
 <div id="discount" class="page">
-  <h3 id="discountTitle">Skidkalar</h3>
-  <input class="search" type="text" id="searchDiscount" placeholder="Qidirish..." oninput="renderDiscounts()">
+  <h3 id="discountTitle">Скидки</h3>
+  <input class="search" type="text" id="searchDiscount" placeholder="Поиск..." oninput="renderDiscounts()">
   <div id="discountList"></div>
 </div>
 
 <!-- ==================== CART ==================== -->
 <div id="cart" class="page">
-  <h3 id="cartTitle">Savatcha</h3>
-  <input type="text" id="cartName" placeholder="Ism Familiya" oninput="checkOrderBtn()">
+  <h3 id="cartTitle">Корзина</h3>
+  <input type="text" id="cartName" placeholder="Имя Фамилия" oninput="checkOrderBtn()">
   <input type="text" id="cartPhone" placeholder="+998901234567" oninput="checkOrderBtn()">
   <div id="cartItems"></div>
   <h3 id="total"></h3>
-  <button id="orderBtn" class="primary" onclick="sendOrder()" disabled>Buyurtma berish</button>
+  <button id="orderBtn" class="primary" onclick="sendOrder()" disabled>Заказать</button>
 </div>
 
 <!-- ==================== HISTORY ==================== -->
 <div id="history" class="page">
-  <h3 id="historyTitle">Buyurtmalar tarixi</h3>
+  <h3 id="historyTitle">История заказов</h3>
   <div id="historyList"></div>
 </div>
 
 <!-- ==================== PROFILE ==================== -->
 <div id="profile" class="page">
-  <h3 id="profileTitle">Profil</h3>
-  <input type="text" id="profileName" placeholder="Ism Familiya">
+  <h3 id="profileTitle">Профиль</h3>
+  <input type="text" id="profileName" placeholder="Имя Фамилия">
   <input type="text" id="profilePhone" placeholder="+998901234567">
-  <button class="primary" onclick="saveProfile()">Saqlash</button>
-  <hr style="border:1px solid #ccc;margin:20px 0">
-  <button class="secondary" onclick="setLang('uz')">UZ</button>
-  <button class="secondary" onclick="setLang('ru')">RU</button>
+  <button class="primary" onclick="saveProfile()" style="border: 3px solid #fff; border-radius: 10px; color: #ffffff; padding: 2% 5%;">Сохранить</button>
 </div>
 
 <!-- ==================== NAVBAR ==================== -->
 <div class="navbar">
-  <button onclick="showPage('menu')">Menu</button>
-  <button onclick="showPage('discount')">Skidka</button>
-  <button onclick="showPage('cart');loadCart()">Savatcha</button>
-  <button onclick="showPage('history');renderHistory()">Tarix</button>
-  <button onclick="showPage('profile');loadProfile()">Profil</button>
+  <button onclick="showPage('menu')">Меню</button>
+  <button onclick="showPage('discount')">Скидки</button>
+  <button onclick="showPage('cart');loadCart()">Корзина</button>
+  <button onclick="showPage('history');renderHistory()">История</button>
+  <button onclick="showPage('profile');loadProfile()">Профиль</button>
 </div>
 
 <!-- ==================== MODAL ==================== -->
@@ -179,7 +191,7 @@ input{
     <h3 id="modalName"></h3>
     <p id="modalPrice"></p>
     <div id="modalAction"></div>
-    <button class="close-btn" onclick="closeModal()">Yopish</button>
+    <button class="close-btn" onclick="closeModal()">Закрыть</button>
   </div>
 </div>
 
@@ -189,12 +201,24 @@ const chatId="8336275561";
 let lang=localStorage.getItem("lang")||"uz";
 
 let products=[
-  {name:'8 ELEMENT',price:42000,img:'https://cdn1.ozone.ru/s3/multimedia-1-2/7552305362.jpg'},
-  {name:'Samsung S23',price:7500000,img:'https://images.samsung.com/is/image/samsung/p6pim/uz/2302/gallery/uz-galaxy-s23-s911-sm-s911bzkgcau-thumb-534863122'}
+  {name:'8 ELEMENT<br>Шампунь мужская',price:42000,img:'https://cdn1.ozone.ru/s3/multimedia-1-2/7552305362.jpg'},
+  {name:'Fairy Baby 1<br>липучки памперсы',price:45000,img:'https://avatars.mds.yandex.net/i?id=e6a9e77e279d77465f5e7e0a67c727eb026cb3e3-13219746-images-thumbs&n=13'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg'},
 ];
 
 let discounts=[
-  {name:'AirPods',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg',old:95000}
+  {name:'Eron<br>гель для стирки (синий)',price:85000,img:'https://images.uzum.uz/d2rg88b4eu2h0tmq7hj0/original.jpg',old:95000}
 ];
 
 let cart=JSON.parse(localStorage.getItem('cart'))||[];
@@ -211,13 +235,6 @@ function applyLang(){
     historyTitle.innerText="История заказов";
     profileTitle.innerText="Профиль";
     orderBtn.innerText="Оформить заказ";
-  }else{
-    menuTitle.innerText="Mahsulotlar";
-    discountTitle.innerText="Skidkalar";
-    cartTitle.innerText="Savatcha";
-    historyTitle.innerText="Buyurtmalar tarixi";
-    profileTitle.innerText="Profil";
-    orderBtn.innerText="Buyurtma berish";
   }
 }
 
@@ -231,7 +248,7 @@ function renderProducts(){
       <img src='${p.img}'>
       <div>
         <h4>${p.name}</h4>
-        <p>${p.price.toLocaleString()} so'm</p>
+        <p>${p.price.toLocaleString()} сум</p>
       </div>
     </div>`;
   });
@@ -247,7 +264,7 @@ function renderDiscounts(){
       <img src='${p.img}'>
       <div>
         <h4>${p.name}</h4>
-        <p><s>${p.old.toLocaleString()}</s> → ${p.price.toLocaleString()} so'm</p>
+        <p><s>${p.old.toLocaleString()}</s> → ${p.price.toLocaleString()} сум</p>
       </div>
     </div>`;
   });
@@ -257,7 +274,7 @@ function openModal(p){
   currentProduct=p;
   modalImg.src=p.img;
   modalName.innerText=p.name;
-  modalPrice.innerText=p.price.toLocaleString()+" so'm";
+  modalPrice.innerText=p.price.toLocaleString()+" сум";
   updateModalButtons();
   productModal.style.display="flex";
 }
@@ -273,7 +290,7 @@ function updateModalButtons(){
       <button onclick="changeQty(1)">+</button>
     </div>`;
   }else{
-    modalAction.innerHTML=`<button class="primary" onclick="addToCart()">Savatchaga qo'shish</button>`;
+    modalAction.innerHTML=`<button class="primary" onclick="addToCart()">Добавить в корзину</button>`;
   }
 }
 
@@ -311,7 +328,7 @@ function loadCart(){
     </div>`;
   });
   totalElem=document.getElementById("total");
-  totalElem.innerText="Jami: "+total.toLocaleString()+" so'm";
+  totalElem.innerText="Общ: "+total.toLocaleString()+" сум";
   if(profile.name) cartName.value=profile.name;
   if(profile.phone) cartPhone.value=profile.phone;
   checkOrderBtn();
@@ -340,16 +357,16 @@ function sendOrder(){
   profile={name,phone};
   localStorage.setItem("profile",JSON.stringify(profile));
   let total=0;
-  let message="🛒 YANGI BUYURTMA\n\n👤 Ism: "+name+"\n📞 Telefon: "+phone+"\n\n📦 Mahsulotlar:\n";
+  let message="🛒 Новый Заказ\n\n👤 Имя: "+name+"\n📞 Телефон: "+phone+"\n\n📦 Товары:\n";
   cart.forEach(i=>{
-    message+=i.name+" x"+i.qty+" - "+(i.price*i.qty).toLocaleString()+" so'm\n";
+    message+=i.name+" x"+i.qty+" - "+(i.price*i.qty).toLocaleString()+" сум\n";
     total+=i.price*i.qty;
   });
-  message+="\n💰 Jami: "+total.toLocaleString()+" so'm";
+  message+="\n💰 Jami: "+total.toLocaleString()+" сум";
   fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
   .then(res=>{
     if(res.ok){
-      alert(lang==="ru"?"Заказ отправлен!":"Buyurtma yuborildi!");
+      alert("Buyurtma yuborildi!");
       history.push({name,phone,items:[...cart],total});
       localStorage.setItem("history",JSON.stringify(history));
       cart=[];
@@ -366,7 +383,7 @@ function renderHistory(){
     historyList.innerHTML+=`
     <div class="history-item">
       <div style="flex:1">${h.name} | ${h.phone}</div>
-      <div>${itemsText} | Jami: ${h.total.toLocaleString()} so'm</div>
+      <div>${itemsText} | Общ: ${h.total.toLocaleString()} сум</div>
     </div>`;
   });
 }
