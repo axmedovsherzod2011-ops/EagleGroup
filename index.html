@@ -159,6 +159,10 @@ input::placeholder{
   <div id="cartItems"></div>
   <h3 id="total"></h3>
   <button id="orderBtn" class="primary" onclick="sendOrder()" disabled>Заказать</button>
+  <hr style="margin:30px 0;border:1px solid #ffffff;">
+
+<h3>История заказов</h3>
+<div id="historyListCart"></div>
 </div>
 
 <!-- ==================== HISTORY ==================== -->
@@ -179,8 +183,7 @@ input::placeholder{
 <div class="navbar">
   <button onclick="showPage('menu')">Меню</button>
   <button onclick="showPage('discount')">Скидки</button>
-  <button onclick="showPage('cart');loadCart()">Корзина</button>
-  <button onclick="showPage('history');renderHistory()">История</button>
+  <button onclick="showPage('cart');loadCart();renderHistory()">Корзина</button>
   <button onclick="showPage('profile');loadProfile()">Профиль</button>
 </div>
 
@@ -378,13 +381,24 @@ function sendOrder(){
 
 function renderHistory(){
   historyList.innerHTML="";
+  if(document.getElementById("historyListCart")){
+    historyListCart.innerHTML="";
+  }
+
   history.forEach(h=>{
     let itemsText=h.items.map(it=>it.name+" x"+it.qty).join(", ");
-    historyList.innerHTML+=`
+
+    let html=`
     <div class="history-item">
       <div style="flex:1">${h.name} | ${h.phone}</div>
       <div>${itemsText} | Общ: ${h.total.toLocaleString()} сум</div>
     </div>`;
+
+    historyList.innerHTML+=html;
+
+    if(document.getElementById("historyListCart")){
+      historyListCart.innerHTML+=html;
+    }
   });
 }
 
