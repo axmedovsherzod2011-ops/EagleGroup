@@ -133,6 +133,16 @@ input::placeholder{
   width:100%;
   margin-top:10px;
 }
+#orderBtn:disabled{
+  background:#ccc;
+  color:#888;
+  cursor:not-allowed;
+}
+
+#orderBtn:not(:disabled){
+  background: #fff;
+  color: #0051ff;
+}
 </style>
 </head>
 <body>
@@ -428,7 +438,3 @@ window.onload=function(){
 </body>
 
 </html>
-
-
-
-
